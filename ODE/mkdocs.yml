@@ -8,9 +8,18 @@ nav:
   - reference.md
 
 markdown_extensions:
-  - toc:
-      permalink: true
-      permalink_class: toc-permalink
+  - pymdownx.extra
+  - pymdownx.highlight
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.emoji
+  - pymdownx.tasklist
+  - pymdownx.tilde
+  - pymdownx.magiclink
+  - pymdownx.smartsymbols
+  - pymdownx.caret
+  - pymdownx.arithmatex
+
 
 plugins:
   - mkdocstrings
