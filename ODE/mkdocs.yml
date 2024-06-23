@@ -1,0 +1,11 @@
+site_name: Python implemented methods to solve ordinary diferential equations (ODEs)
+
+theme: 
+  name: "material"
+
+nav: 
+  - index.md
+  - reference.md
+
+plugins: 
+  - mkdocstrings
