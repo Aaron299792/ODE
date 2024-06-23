@@ -7,5 +7,8 @@ nav:
   - index.md
   - reference.md
 
-plugins: 
+markdown_extensions:
+  - markdown_katex
+
+plugins:
   - mkdocstrings
