@@ -11,31 +11,31 @@
 
 ### Euler's method
 
-    This method is derived directly from the Taylor's first order expansion of a function $x(t)$. Assuming a finite increment $h$, we get
+This method is derived directly from the Taylor's first order expansion of a function $x(t)$. Assuming a finite increment $h$, we get
 
-    $$
-    x(t + h) = x(t) + h\frac{dx}{dt} + \frac{h^2}{2}\frac{d^2x}{dt^2} + O(h^3)
-    $$
+$$
+x(t + h) = x(t) + h\frac{dx}{dt} + \frac{h^2}{2}\frac{d^2x}{dt^2} + O(h^3)
+$$
 
-    The case being $h$ sufficently small, we can get the function by means of 
+The case being $h$ sufficently small, we can get the function by means of 
 
-    $$
-    x(t + h) = x(t) + hf(x,t)
-    $$
+$$
+x(t + h) = x(t) + hf(x,t)
+$$
 
-    where $f(x,t) = \frac{dx}{dt}$
+where $f(x,t) = \frac{dx}{dt}$
 
-    The Euler's algorithim works as follows:
+The Euler's algorithim works as follows:
 
-    * We star off with $t = t_0$, $ x = x_0$, the first one being the initial time and the second one the function we seek evaluated at that time.
-    * An structure that contains a discretization of the time is created for equally distance time steps, such distance is $h$.
-    * For each time in our structure we find a $x$ using the discretize form of the previous equation:
-    $x_i = x_{i-1}$ + hf(x_{i-1}, t_{i-1})
+* We star off with $t = t_0$, $ x = x_0$, the first one being the initial time and the second one the function we seek evaluated at that time.
+* An structure that contains a discretization of the time is created for equally distance time steps, such distance is $h$.
+* For each time in our structure we find a $x$ using the discretize form of the previous equation:
+$x_i = x_{i-1}$ + hf(x_{i-1}, t_{i-1})
 
 For this method is easy from the Taylor expansion to se that the error grows as $\frac{h}{2}\[f_b-f_a\]$
 
 ### Runge-Kutta methods
-    This is a family of methods of different order that uses the Taylor's first order expansion taking into acount more than one previous step to compute the first order differential equation this allow to improve the approximation. In comparison to using only one step behind this family of methods converges faster to the solution than the Euler's method. 
+This is a family of methods of different order that uses the Taylor's first order expansion taking into acount more than one previous step to compute the first order differential equation this allow to improve the approximation. In comparison to using only one step behind this family of methods converges faster to the solution than the Euler's method. 
 
 #### Runge-Kutta method of 2nd order (RK2)
 
