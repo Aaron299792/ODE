@@ -8,7 +8,9 @@ nav:
   - reference.md
 
 markdown_extensions:
-  - markdown_katex
+  - toc:
+      permalink: true
+      permalink_class: toc-permalink
 
 plugins:
   - mkdocstrings
