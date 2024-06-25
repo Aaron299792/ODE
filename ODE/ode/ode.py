@@ -8,8 +8,8 @@ def Euler(x0,t,function):
     -time steps refers to any independent variable steps in these case.
 
     Examples:
-    >>> Euler(1.0, numpy.array[0.0, 0.1, 0.2, 0.3, 0.4], cuadratic_function)
-    array([1.        , 1.1       , 1.221     , 1.3700841 , 1.55779714])
+        >>> Euler(1.0, numpy.array[0.0, 0.1, 0.2, 0.3, 0.4], cuadratic_function)
+        array([1.        , 1.1       , 1.221     , 1.3700841 , 1.55779714])
 
     Args:
     x0 (float): First argument, initial condition of a given ODE problem.
@@ -39,8 +39,8 @@ def Rk2(x0, t, f):
     -time steps refers to any independent variable steps in these case.
 
     Examples:
-    >>> Rk2( 1.0, numpy.array[0.0, 0.1, 0.2, 0.3, 0.4] , cuadratic_function)
-    array([1.        , 0.91926042, 0.86479208, 0.82975512, 0.80971762])
+        >>> Rk2( 1.0, numpy.array[0.0, 0.1, 0.2, 0.3, 0.4] , cuadratic_function)
+        array([1.        , 0.91926042, 0.86479208, 0.82975512, 0.80971762])
 
     Args: 
     x0 (float): First argument, initial condition of a given ODE problem.
@@ -74,8 +74,8 @@ def Rk4(x0,t,f):
     -time steps refers to any independent variable steps in these case.
     
     Examples:
-    >>> Rk4(1.0, numpy.array[0.0, 0.1, 0.2, 0.3, 0.4], cuadratic_function)
-    array([1.        , 1.11111049, 1.24999799, 1.42856619, 1.66665326])
+        >>> Rk4(1.0, numpy.array[0.0, 0.1, 0.2, 0.3, 0.4], cuadratic_function)
+        array([1.        , 1.11111049, 1.24999799, 1.42856619, 1.66665326])
 
     Args:
     x0 (float): First argument, initial condition of a given ODE problem.
