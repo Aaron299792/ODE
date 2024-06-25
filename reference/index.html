@@ -366,22 +366,97 @@
 
     <div class="doc doc-contents ">
 
-      <p>Solves ordinary differential equations (ODEs) using Euler's method for a given initial condition for a defined number of time steps (independent variable steps),for each timestep pass as argument in an array, the function computes the time step size, then it allocates and iterates over an array using Euler's method, such array is then return by the function. Its important to take into account that for the Euler's method the computation error is liniar in the size of the time step, so the closed the time steps are the better results are obtained.</p>
-<p>-it pressumes the use of a numpy array in the arguments so it is necessary to import the numpy module for its use.
--if t is not an rank 1 numpy array, the function will not work.
--time steps refers to any independent variable steps in these case.</p>
+      <p>Solves ordinary differential equations (ODEs) using Euler's method for a given initial condition with a defined number of time steps (independent variable steps). For each timestep pass as argument within an array, the function computes the time step size, then it allocates and iterates over an array using Euler's method, such array is then return by the function. Its important to take into account that for the Euler's method the computation error is linear in the size of the time step, so the smaller the time steps size is, the better results are obtained in the solution.</p>
+<ul>
+<li>it pressumes the use of a numpy array in the arguments so it is necessary to import the numpy module for its use.</li>
+<li>if t is not an rank 1 numpy array, the function will not work.</li>
+<li>time steps refers to any independent variable steps in these case.</li>
+</ul>
 
 
 <p><span class="doc-section-title">Examples:</span></p>
     <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">Euler</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">],</span> <span class="n">cuadratic_function</span><span class="p">)</span>
 <span class="go">array([1.        , 1.1       , 1.221     , 1.3700841 , 1.55779714])</span>
 </code></pre></div>
-      <p>Args:
-x0 (float): First argument, initial condition of a given ODE problem.
-t  (numpy array): Second argument, 1D numpy array that contains the time steps to be evaluated in the solution.
-function : (block statement that returns a float): Third argument, function that evaluates the 1st order derivative for two given values.</p>
-      <p>output (numpy array):
-    Returns an 1D numpy array containing the dependent variable evaluated in a given time step using the Euler's method</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>x0</code></td>
+            <td>
+                  <code>float</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>First argument, initial condition of a given ODE problem.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>t</code></td>
+            <td>
+                  <code> (numpy array</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Second argument, 1D numpy array that contains the time steps to be evaluated in the solution.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>function</code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>(block statement that returns a float): Third argument, function that evaluates the 1st order derivative for two given values.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>output</code></td>            <td>
+                  <code>numpy array</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Returns an 1D numpy array containing the dependent variable evaluated in a given time step using the Euler's method.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
             <details class="quote">
               <summary>Source code in <code>ode/ode.py</code></summary>
@@ -413,28 +488,26 @@ function : (block statement that returns a float): Third argument, function that
 <span class="normal">26</span>
 <span class="normal">27</span>
 <span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">Euler</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">function</span><span class="p">):</span>
+<span class="normal">29</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">Euler</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">function</span><span class="p">):</span>
 
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Solves ordinary differential equations (ODEs) using Euler&#39;s method for a given initial condition for a defined number of time steps (independent variable steps),for each timestep pass as argument in an array, the function computes the time step size, then it allocates and iterates over an array using Euler&#39;s method, such array is then return by the function. Its important to take into account that for the Euler&#39;s method the computation error is liniar in the size of the time step, so the closed the time steps are the better results are obtained.</span>
+<span class="sd">    Solves ordinary differential equations (ODEs) using Euler&#39;s method for a given initial condition with a defined number of time steps (independent variable steps). For each timestep pass as argument within an array, the function computes the time step size, then it allocates and iterates over an array using Euler&#39;s method, such array is then return by the function. Its important to take into account that for the Euler&#39;s method the computation error is linear in the size of the time step, so the smaller the time steps size is, the better results are obtained in the solution.</span>
 
-<span class="sd">    -it pressumes the use of a numpy array in the arguments so it is necessary to import the numpy module for its use.</span>
-<span class="sd">    -if t is not an rank 1 numpy array, the function will not work.</span>
-<span class="sd">    -time steps refers to any independent variable steps in these case.</span>
+<span class="sd">    - it pressumes the use of a numpy array in the arguments so it is necessary to import the numpy module for its use.</span>
+<span class="sd">    - if t is not an rank 1 numpy array, the function will not work.</span>
+<span class="sd">    - time steps refers to any independent variable steps in these case.</span>
 
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; Euler(1.0, numpy.array[0.0, 0.1, 0.2, 0.3, 0.4], cuadratic_function)</span>
 <span class="sd">        array([1.        , 1.1       , 1.221     , 1.3700841 , 1.55779714])</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">    x0 (float): First argument, initial condition of a given ODE problem.</span>
-<span class="sd">    t  (numpy array): Second argument, 1D numpy array that contains the time steps to be evaluated in the solution.</span>
-<span class="sd">    function : (block statement that returns a float): Third argument, function that evaluates the 1st order derivative for two given values.</span>
+<span class="sd">        x0 (float): First argument, initial condition of a given ODE problem.</span>
+<span class="sd">        t  (numpy array): Second argument, 1D numpy array that contains the time steps to be evaluated in the solution.</span>
+<span class="sd">        function : (block statement that returns a float): Third argument, function that evaluates the 1st order derivative for two given values.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">    output (numpy array):</span>
-<span class="sd">        Returns an 1D numpy array containing the dependent variable evaluated in a given time step using the Euler&#39;s method</span>
+<span class="sd">        output (numpy array): Returns an 1D numpy array containing the dependent variable evaluated in a given time step using the Euler&#39;s method.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -461,27 +534,103 @@ function : (block statement that returns a float): Third argument, function that
 
     <div class="doc doc-contents ">
 
-      <p>Solves ordinary differential equations (ODEs) using a Runge-Kutta method of 2nd order (RK2)for a given initial condition for a defined number of time steps (independent variable steps),for each timestep pass as argument in an array, the function computes the time step size, then it allocates and iterates over an array using the method, such array is then return by the function. Its important to take into account that for the Runge-Kutta of 2nd order the more time steps the more precise results are get.</p>
-<p>-it pressumes the use of a numpy array in the arguments so it is necessary to import the numpy module for its use.
--if t is not an rank 1 numpy array, the function will not work.it pressumes the use of a numpy array in the arguments
--time steps refers to any independent variable steps in these case.</p>
+      <p>Solves ordinary differential equations (ODEs) using a Runge-Kutta method of 2nd order (RK2) for a given initial condition with a defined number of time steps (independent variable steps). For each timestep pass as argument within an array, the function computes the time step size, then it allocates and iterates over an array using the method, such array is then return by the function. Its important to take into account that for the Runge-Kutta of 2nd order the more time steps the more precise results are get, although it is more precisse than the Euler's method.</p>
+<ul>
+<li>it pressumes the use of a numpy array in the arguments so it is necessary to import the numpy module for its use.</li>
+<li>if t is not an rank 1 numpy array, the function will not work.it pressumes the use of a numpy array in the arguments</li>
+<li>time steps refers to any independent variable steps in these case.</li>
+</ul>
 
 
 <p><span class="doc-section-title">Examples:</span></p>
     <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">Rk2</span><span class="p">(</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">]</span> <span class="p">,</span> <span class="n">cuadratic_function</span><span class="p">)</span>
 <span class="go">array([1.        , 0.91926042, 0.86479208, 0.82975512, 0.80971762])</span>
 </code></pre></div>
-      <p>Args: 
-x0 (float): First argument, initial condition of a given ODE problem.
-t (array_like): Second argument, 1D numpy array that contains the time steps to be evaluated in the solution of the ODE.
-function (block statement that returns a float): Third argument, function that evaluates the 1st order derivative for two given values.</p>
-<p>Returns
-output (array_like):<br />
-    Returns an 1D numpy array containing the dependent variable evaluated in a given time step using the Runge-Kutta method of 2nd order.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>x0</code></td>
+            <td>
+                  <code>float</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>First argument, initial condition of a given ODE problem.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>t</code></td>
+            <td>
+                  <code>array_like</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Second argument, 1D numpy array that contains the time steps to be evaluated in the solution of the ODE.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>function</code></td>
+            <td>
+                  <code>block statement that returns a float</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Third argument, function that evaluates the 1st order derivative for two given values.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>output</code></td>            <td>
+                  <code>array_like</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Returns an 1D numpy array containing the dependent variable evaluated in a given time step using the Runge-Kutta method of 2nd order.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
             <details class="quote">
               <summary>Source code in <code>ode/ode.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">32</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">31</span>
+<span class="normal">32</span>
 <span class="normal">33</span>
 <span class="normal">34</span>
 <span class="normal">35</span>
@@ -512,29 +661,26 @@ output (array_like):<br />
 <span class="normal">60</span>
 <span class="normal">61</span>
 <span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">Rk2</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+<span class="normal">63</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">Rk2</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
 
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; </span>
-<span class="sd">    Solves ordinary differential equations (ODEs) using a Runge-Kutta method of 2nd order (RK2)for a given initial condition for a defined number of time steps (independent variable steps),for each timestep pass as argument in an array, the function computes the time step size, then it allocates and iterates over an array using the method, such array is then return by the function. Its important to take into account that for the Runge-Kutta of 2nd order the more time steps the more precise results are get.</span>
+<span class="sd">    Solves ordinary differential equations (ODEs) using a Runge-Kutta method of 2nd order (RK2) for a given initial condition with a defined number of time steps (independent variable steps). For each timestep pass as argument within an array, the function computes the time step size, then it allocates and iterates over an array using the method, such array is then return by the function. Its important to take into account that for the Runge-Kutta of 2nd order the more time steps the more precise results are get, although it is more precisse than the Euler&#39;s method.</span>
 
-<span class="sd">    -it pressumes the use of a numpy array in the arguments so it is necessary to import the numpy module for its use.</span>
-<span class="sd">    -if t is not an rank 1 numpy array, the function will not work.it pressumes the use of a numpy array in the arguments</span>
-<span class="sd">    -time steps refers to any independent variable steps in these case.</span>
+<span class="sd">    - it pressumes the use of a numpy array in the arguments so it is necessary to import the numpy module for its use.</span>
+<span class="sd">    - if t is not an rank 1 numpy array, the function will not work.it pressumes the use of a numpy array in the arguments</span>
+<span class="sd">    - time steps refers to any independent variable steps in these case.</span>
 
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; Rk2( 1.0, numpy.array[0.0, 0.1, 0.2, 0.3, 0.4] , cuadratic_function)</span>
 <span class="sd">        array([1.        , 0.91926042, 0.86479208, 0.82975512, 0.80971762])</span>
 
 <span class="sd">    Args: </span>
-<span class="sd">    x0 (float): First argument, initial condition of a given ODE problem.</span>
-<span class="sd">    t (array_like): Second argument, 1D numpy array that contains the time steps to be evaluated in the solution of the ODE.</span>
-<span class="sd">    function (block statement that returns a float): Third argument, function that evaluates the 1st order derivative for two given values.</span>
+<span class="sd">        x0 (float): First argument, initial condition of a given ODE problem.</span>
+<span class="sd">        t (array_like): Second argument, 1D numpy array that contains the time steps to be evaluated in the solution of the ODE.</span>
+<span class="sd">        function (block statement that returns a float): Third argument, function that evaluates the 1st order derivative for two given values.</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    output (array_like):  </span>
-<span class="sd">        Returns an 1D numpy array containing the dependent variable evaluated in a given time step using the Runge-Kutta method of 2nd order.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        output (array_like): Returns an 1D numpy array containing the dependent variable evaluated in a given time step using the Runge-Kutta method of 2nd order.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -565,80 +711,153 @@ output (array_like):<br />
 
     <div class="doc doc-contents ">
 
-      <p>Solves ordinary differential equations (ODEs) using a Runge-Kutta method 4th (RK4)for a given initial condition for a defined number of time steps (independent variable steps),for each timestep pass as argument in an array, the function computes the time step size, then it allocates and iterates over an array using the Runge-Kutta method of 4th, such array is then return by the function. Its important to take into account that for this method the more time steps and shorter time step size, the better the results are</p>
-<p>-it pressumes the use of a numpy array in the arguments so it is necessary to import the numpy module for its use.
--if t is not an rank 1 numpy array, the function will not work.it pressumes the use of a numpy array in the arguments
--time steps refers to any independent variable steps in these case.</p>
+      <p>Solves ordinary differential equations (ODEs) using a Runge-Kutta method 4th (RK4)for a given initial condition with a defined number of time steps (independent variable steps),for each timestep pass as argument within an array, the function computes the time step size, then it allocates and iterates over an array using the Runge-Kutta method of 4th, such array is then return by the function. With these method the convergence to the integral value is much more faster and more sutable to be used in most scenearios.</p>
+<ul>
+<li>it pressumes the use of a numpy array in the arguments so it is necessary to import the numpy module for its use.</li>
+<li>if t is not an rank 1 numpy array, the function will not work.it pressumes the use of a numpy array in the arguments</li>
+<li>time steps refers to any independent variable steps in these case.</li>
+</ul>
 
 
 <p><span class="doc-section-title">Examples:</span></p>
     <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">Rk4</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">],</span> <span class="n">cuadratic_function</span><span class="p">)</span>
 <span class="go">array([1.        , 1.11111049, 1.24999799, 1.42856619, 1.66665326])</span>
 </code></pre></div>
-      <p>Args:
-x0 (float): First argument, initial condition of a given ODE problem.
-t (array_like): Second argument, 1D numpy array that contains the time steps to be evaluated in the solution of the ODE.
-function (block statement that returns a float): Third argument, function that evaluates the 1st order derivative for two given values.</p>
-<p>Returns
-output (array_like):
-    Returns an 1D numpy array containing the dependent variable evaluated in a given time step using the Runge-Kutta method of 4th order.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>x0</code></td>
+            <td>
+                  <code>float</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>First argument, initial condition of a given ODE problem.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>t</code></td>
+            <td>
+                  <code>array_like</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Second argument, 1D numpy array that contains the time steps to be evaluated in the solution of the ODE.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>function</code></td>
+            <td>
+                  <code>block statement that returns a float</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Third argument, function that evaluates the 1st order derivative for two given values.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>output</code></td>            <td>
+                  <code>array_like</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Returns an 1D numpy array containing the dependent variable evaluated in a given time step using the Runge-Kutta method of 4th order.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
             <details class="quote">
               <summary>Source code in <code>ode/ode.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 67</span>
-<span class="normal"> 68</span>
-<span class="normal"> 69</span>
-<span class="normal"> 70</span>
-<span class="normal"> 71</span>
-<span class="normal"> 72</span>
-<span class="normal"> 73</span>
-<span class="normal"> 74</span>
-<span class="normal"> 75</span>
-<span class="normal"> 76</span>
-<span class="normal"> 77</span>
-<span class="normal"> 78</span>
-<span class="normal"> 79</span>
-<span class="normal"> 80</span>
-<span class="normal"> 81</span>
-<span class="normal"> 82</span>
-<span class="normal"> 83</span>
-<span class="normal"> 84</span>
-<span class="normal"> 85</span>
-<span class="normal"> 86</span>
-<span class="normal"> 87</span>
-<span class="normal"> 88</span>
-<span class="normal"> 89</span>
-<span class="normal"> 90</span>
-<span class="normal"> 91</span>
-<span class="normal"> 92</span>
-<span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">Rk4</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">f</span><span class="p">):</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span>
+<span class="normal">93</span>
+<span class="normal">94</span>
+<span class="normal">95</span>
+<span class="normal">96</span>
+<span class="normal">97</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">Rk4</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">f</span><span class="p">):</span>
 
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; </span>
-<span class="sd">    Solves ordinary differential equations (ODEs) using a Runge-Kutta method 4th (RK4)for a given initial condition for a defined number of time steps (independent variable steps),for each timestep pass as argument in an array, the function computes the time step size, then it allocates and iterates over an array using the Runge-Kutta method of 4th, such array is then return by the function. Its important to take into account that for this method the more time steps and shorter time step size, the better the results are</span>
+<span class="sd">    Solves ordinary differential equations (ODEs) using a Runge-Kutta method 4th (RK4)for a given initial condition with a defined number of time steps (independent variable steps),for each timestep pass as argument within an array, the function computes the time step size, then it allocates and iterates over an array using the Runge-Kutta method of 4th, such array is then return by the function. With these method the convergence to the integral value is much more faster and more sutable to be used in most scenearios.</span>
 
-<span class="sd">    -it pressumes the use of a numpy array in the arguments so it is necessary to import the numpy module for its use.</span>
-<span class="sd">    -if t is not an rank 1 numpy array, the function will not work.it pressumes the use of a numpy array in the arguments</span>
-<span class="sd">    -time steps refers to any independent variable steps in these case.</span>
+<span class="sd">    - it pressumes the use of a numpy array in the arguments so it is necessary to import the numpy module for its use.</span>
+<span class="sd">    - if t is not an rank 1 numpy array, the function will not work.it pressumes the use of a numpy array in the arguments</span>
+<span class="sd">    - time steps refers to any independent variable steps in these case.</span>
 
 <span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; Rk4(1.0, numpy.array[0.0, 0.1, 0.2, 0.3, 0.4], cuadratic_function)</span>
 <span class="sd">        array([1.        , 1.11111049, 1.24999799, 1.42856619, 1.66665326])</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">    x0 (float): First argument, initial condition of a given ODE problem.</span>
-<span class="sd">    t (array_like): Second argument, 1D numpy array that contains the time steps to be evaluated in the solution of the ODE.</span>
-<span class="sd">    function (block statement that returns a float): Third argument, function that evaluates the 1st order derivative for two given values.</span>
+<span class="sd">        x0 (float): First argument, initial condition of a given ODE problem.</span>
+<span class="sd">        t (array_like): Second argument, 1D numpy array that contains the time steps to be evaluated in the solution of the ODE.</span>
+<span class="sd">        function (block statement that returns a float): Third argument, function that evaluates the 1st order derivative for two given values.</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    output (array_like):</span>
-<span class="sd">        Returns an 1D numpy array containing the dependent variable evaluated in a given time step using the Runge-Kutta method of 4th order.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        output (array_like): Returns an 1D numpy array containing the dependent variable evaluated in a given time step using the Runge-Kutta method of 4th order.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">h</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
