@@ -402,68 +402,75 @@
 
 <h1 id="python-ode-solvers-implementation">Python ODE solvers implementation</h1>
 <h2 id="project-layout">Project layout</h2>
-<div class="highlight"><pre><span></span><code>mkdocs.yml    # The configuration file.
+<pre><code>mkdocs.yml    # The configuration file.
 docs/
     index.md  # Introduction to the numerical methods to solve ODEs. 
     reference.md  # The documentation of the methods implemented in python.
-</code></pre></div>
+</code></pre>
 <h2 id="numerical-methods-to-solve-ordinary-differential-equations-odes">Numerical methods to solve ordinary differential equations (ODEs)</h2>
 <h3 id="eulers-method">Euler's method</h3>
-<p>This method is derived directly from the Taylor's first order expansion of a function <span class="arithmatex"><span class="MathJax_Preview">x(t)</span><script type="math/tex">x(t)</script></span>. Assuming a finite increment <span class="arithmatex"><span class="MathJax_Preview">h</span><script type="math/tex">h</script></span>, we get</p>
-<div class="arithmatex">
-<div class="MathJax_Preview">
-x(t + h) = x(t) + h\frac{dx}{dt} + \frac{h^2}{2}\frac{d^2x}{dt^2} + O(h^3)
-</div>
+<p>This method is derived directly from the Taylor's first order expansion of a function <script type="math/tex">x(t)</script>. Assuming a finite increment <script type="math/tex">h</script>, we get</p>
+<p>
 <script type="math/tex; mode=display">
 x(t + h) = x(t) + h\frac{dx}{dt} + \frac{h^2}{2}\frac{d^2x}{dt^2} + O(h^3)
 </script>
-</div>
-<p>The case being <span class="arithmatex"><span class="MathJax_Preview">h</span><script type="math/tex">h</script></span> sufficently small, we can get the function by means of </p>
-<div class="arithmatex">
-<div class="MathJax_Preview">
-x(t + h) = x(t) + hf(x,t)
-</div>
+</p>
+<p>The case being <script type="math/tex">h</script> sufficently small, we can get the function by means of </p>
+<p>
 <script type="math/tex; mode=display">
 x(t + h) = x(t) + hf(x,t)
 </script>
-</div>
-<p>where <span class="arithmatex"><span class="MathJax_Preview">f(x,t) = \frac{dx}{dt}</span><script type="math/tex">f(x,t) = \frac{dx}{dt}</script></span></p>
+</p>
+<p>where <script type="math/tex; mode=display">f(x,t) = \frac{dx}{dt}</script>
+</p>
 <p>The Euler's algorithim works as follows:</p>
 <ul>
-<li>We star off with <span class="arithmatex"><span class="MathJax_Preview">t = t_0</span><script type="math/tex">t = t_0</script></span>, $ x = x_0$, the first one being the initial time and the second one the function we seek evaluated at that time.</li>
-<li>An structure that contains a discretization of the time is created for equally distance time steps, such distance is <span class="arithmatex"><span class="MathJax_Preview">h</span><script type="math/tex">h</script></span>.</li>
-<li>For each time in our structure we find a <span class="arithmatex"><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> using the discretize form of the previous equation:
-<span class="arithmatex"><span class="MathJax_Preview">x_i = x_{i-1}</span><script type="math/tex">x_i = x_{i-1}</script></span> + hf(x_{i-1}, t_{i-1})</li>
+<li>We star off with <script type="math/tex">t = t_0</script>,  <script type="math/tex">x = x_0</script>, the first one being the initial time and the second one the function we seek evaluated at that time.</li>
+<li>An structure that contains a discretization of the time is created for equally distance time steps, such distance is <script type="math/tex">h</script>.</li>
+<li>For each time in our structure we find a x using the discretize form of the previous equation:
+<script type="math/tex; mode=display">x_i = x_{i-1} + hf(x_{i-1}, t_{i-1})</script>
+</li>
 </ul>
-<p>For this method is easy from the Taylor expansion to se that the error grows as <span class="arithmatex"><span class="MathJax_Preview">\frac{h}{2}\[f_b-f_a\]</span><script type="math/tex">\frac{h}{2}\[f_b-f_a\]</script></span></p>
+<p>For this method is easy from the Taylor expansion to se that the error grows as <script type="math/tex; mode=display">\frac{h}{2}[f_b-f_a]</script>
+</p>
 <h3 id="runge-kutta-methods">Runge-Kutta methods</h3>
 <p>This is a family of methods of different order that uses the Taylor's first order expansion taking into acount more than one previous step to compute the first order differential equation this allow to improve the approximation. In comparison to using only one step behind this family of methods converges faster to the solution than the Euler's method. </p>
-<h4 id="runge-kutta-method-of-2nd-order-rk2">Runge-Kutta method of 2<sup>nd</sup> order (RK2)</h4>
-<p>This method uses an approximation in half size steps compare to the full step that uses the Euler method such that we evaluate the function in <span class="arithmatex"><span class="MathJax_Preview">t = t + h/2</span><script type="math/tex">t = t + h/2</script></span>. This improves the aproximation for the same value of h that is used in the Euler method. </p>
+<h4 id="runge-kutta-method-of-2nd-order-rk2">Runge-Kutta method of 2nd order (RK2)</h4>
+<p>This method uses an approximation in half size steps compare to the full step that uses the Euler method such that we evaluate the function in <script type="math/tex">t = t + h/2</script>. This improves the aproximation for the same value of h that is used in the Euler method. </p>
 <p>Approximating the function through the first order term of the Taylor's expansion we get:</p>
-<div class="arithmatex">
-<div class="MathJax_Preview">
-x(t + h) = x(t) + hf\[x(t+h/2), t + h/2\] + O(h^3)
-</div>
+<p>
 <script type="math/tex; mode=display">
-x(t + h) = x(t) + hf\[x(t+h/2), t + h/2\] + O(h^3)
+x(t + h) = x(t) + hf[x(t+h/2), t + h/2] + O(h^3)
 </script>
-</div>
-<p>The <span class="arithmatex"><span class="MathJax_Preview">h^2</span><script type="math/tex">h^2</script></span> method vanishes an the error goes from <span class="arithmatex"><span class="MathJax_Preview">h^2</span><script type="math/tex">h^2</script></span> order to a <span class="arithmatex"><span class="MathJax_Preview">h^3</span><script type="math/tex">h^3</script></span> order error.</p>
+</p>
 <p>Finally we implement the following equations in our algorithim to implement the RK2 method:</p>
 <ul>
-<li><span class="arithmatex"><span class="MathJax_Preview">k_1 = hf(x,t)</span><script type="math/tex">k_1 = hf(x,t)</script></span></li>
-<li><span class="arithmatex"><span class="MathJax_Preview">k_2 = hf\left(x + \frac{k_1}{2}, t + \frac{h}{2}\right)</span><script type="math/tex">k_2 = hf\left(x + \frac{k_1}{2}, t + \frac{h}{2}\right)</script></span> </li>
-<li>$ x(t + h) = x(t) + k_2 $</li>
+<li>
+<script type="math/tex; mode=display">k_1 = hf(x,t)</script>
+</li>
+<li>
+<script type="math/tex; mode=display">k_2 = hf\left(x + \frac{k_1}{2}, t + \frac{h}{2}\right)</script>
+</li>
+<li>
+<script type="math/tex; mode=display"> x(t + h) = x(t) + k_2 </script>
+</li>
 </ul>
-<h4 id="runge-kutta-method-of-4th-order-rk4">Runge-Kutta method of 4<sup>th</sup> order (RK4)</h4>
-<p>Using the same approach as the Euler's and RK2 method, we find a expresion for the  function using an expansion of the Taylor's series using 4 steps rather than one, this allows after a cumbersome algebra to get ride of the <span class="arithmatex"><span class="MathJax_Preview">h^3</span><script type="math/tex">h^3</script></span> and <span class="arithmatex"><span class="MathJax_Preview">h^4</span><script type="math/tex">h^4</script></span> orders and to get a approximation with an error that grows as <span class="arithmatex"><span class="MathJax_Preview">h^5</span><script type="math/tex">h^5</script></span>, this makes the RK4 a method which is consider for many the perfect balance between complexity and error of approximation. The RK4 equations are:</p>
+<h4 id="runge-kutta-method-of-4th-order-rk4">Runge-Kutta method of 4th order (RK4)</h4>
+<p>Using the same approach as the Euler's and RK2 method, we find a expresion for the  function using an expansion of the Taylor's series using 4 steps rather than one, this allows after a cumbersome algebra to get ride of the <script type="math/tex">h^3</script> and <script type="math/tex">h^4</script> orders and to get a approximation with an error that grows as <script type="math/tex">h^5</script>, this makes the RK4 a method which is consider for many the perfect balance between complexity and error of approximation. The RK4 equations are:</p>
 <ul>
-<li><span class="arithmatex"><span class="MathJax_Preview">k_1 = hf(x,t)</span><script type="math/tex">k_1 = hf(x,t)</script></span></li>
-<li><span class="arithmatex"><span class="MathJax_Preview">k_2 = hf(x+\frac{k_1}{2}, t + \frac{h}{2})</span><script type="math/tex">k_2 = hf(x+\frac{k_1}{2}, t + \frac{h}{2})</script></span></li>
-<li>$k_3 = hf(x + \frac{k_2}{2}, t + \frac{h}{2})</li>
-<li>$k_4 = hf(x + k_3, t +h)</li>
-<li>$x(t + h) = x(t) + \frac{1}{6}(k_1  + 2k_2 + 2k_3 + k_4)</li>
+<li>
+<script type="math/tex; mode=display">k_1 = hf(x,t)</script>
+</li>
+<li>
+<script type="math/tex; mode=display">k_2 = hf(x+\frac{k_1}{2}, t + \frac{h}{2})</script>
+</li>
+<li>$k_3 = hf(x + \frac{k_2}{2}, t + \frac{h}{2})$$</li>
+<li>
+<script type="math/tex; mode=display">k_4 = hf(x + k_3, t +h)</script>
+</li>
+<li>
+<script type="math/tex; mode=display">x(t + h) = x(t) + \frac{1}{6}(k_1  + 2k_2 + 2k_3 + k_4)</script>
+</li>
 </ul>
 <p>This method is useful in most applications, it's easy to code and the results are precisse. </p>
 
@@ -516,6 +523,8 @@ x(t + h) = x(t) + hf\[x(t+h/2), t + h/2\] + O(h^3)
     
     
       <script src="assets/javascripts/bundle.081f42fc.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
       
     
   </body>

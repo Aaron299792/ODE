@@ -7,19 +7,11 @@ nav:
   - index.md
   - reference.md
 
-markdown_extensions:
-  - pymdownx.extra
-  - pymdownx.highlight
-  - pymdownx.details
-  - pymdownx.superfences
-  - pymdownx.emoji
-  - pymdownx.tasklist
-  - pymdownx.tilde
-  - pymdownx.magiclink
-  - pymdownx.smartsymbols
-  - pymdownx.caret
-  - pymdownx.arithmatex
+extra_javascript: 
+    - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 
+markdown_extensions:
+    - mdx_math
 
 plugins:
   - mkdocstrings
