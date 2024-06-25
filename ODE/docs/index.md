@@ -59,7 +59,7 @@ Using the same approach as the Euler's and RK2 method, we find a expresion for t
 
 * $$k_1 = hf(x,t)$$
 * $$k_2 = hf(x+\frac{k_1}{2}, t + \frac{h}{2})$$
-* $k_3 = hf(x + \frac{k_2}{2}, t + \frac{h}{2})$$
+* $$k_3 = hf(x + \frac{k_2}{2}, t + \frac{h}{2})$$
 * $$k_4 = hf(x + k_3, t +h)$$
 * $$x(t + h) = x(t) + \frac{1}{6}(k_1  + 2k_2 + 2k_3 + k_4)$$
 
